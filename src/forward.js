@@ -4,8 +4,11 @@ import { encode } from "./encode";
 /**
  * Conversion of longitude and latitude to MGRS.
  *
- * @param {Object} LL Object literal with lat and lon properties on a WGS84 ellipsoid.
- * @param {Number} [accuracy=5] Accuracy in digits (5 for 1 m, 4 for 10 m, 3 for 100 m, 2 for 1,000 m or 1 for 10,000 m).
+ * @param {Object} LL Object literal with lat and lon properties on a WGS84
+ * ellipsoid.
+ * @param {Number} [accuracy=5] Accuracy in digits (5 for 1 m, 4 for 10 m, 3
+ * for 100 m, 2 for 1,000 m or 1 for 10,000 m).
+ *
  * @return {string} the MGRS  string for the given location and accuracy.
  */
 function forward(LL, accuracy = 5) {
