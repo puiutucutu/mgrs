@@ -1,3 +1,6 @@
+import { get100kSetForZone } from "./get100kSetForZone";
+import { getLetter100kID } from "./getLetter100kID";
+
 /**
  * Get the two letter 100k designator for a given UTM easting,
  * northing and zone number value.
@@ -12,7 +15,8 @@ function get100kID(easting, northing, zoneNumber) {
   const setParm = get100kSetForZone(zoneNumber);
   const setColumn = Math.floor(easting / 100000);
   const setRow = Math.floor(northing / 100000) % 20;
+
   return getLetter100kID(setColumn, setRow, setParm);
 }
 
-export { get100kID }
+export { get100kID };
