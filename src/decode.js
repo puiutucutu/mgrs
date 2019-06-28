@@ -6,24 +6,28 @@
  * @return {object} An object literal with easting, northing, zoneLetter,
  *     zoneNumber and accuracy (in meters) properties.
  */
-function decode(mgrsString) {
+import { getMinNorthing } from "./getMinNorthing";
+import { get100kSetForZone } from "./get100kSetForZone";
+import { getEastingFromChar } from "./getEastingFromChar";
+import { getNorthingFromChar } from "./getNorthingFromChar";
 
+function decode(mgrsString) {
   if (mgrsString && mgrsString.length === 0) {
-    throw new TypeError('MGRSPoint coverting from nothing');
+    throw new TypeError("MGRSPoint coverting from nothing");
   }
 
   //remove any spaces in MGRS String
-  mgrsString = mgrsString.replace(/ /g, '');
+  mgrsString = mgrsString.replace(/ /g, "");
 
   const { length } = mgrsString;
 
   let hunK = null;
-  let sb = '';
+  let sb = "";
   let testChar;
   let i = 0;
 
   // get Zone number
-  while (!(/[A-Z]/).test(testChar = mgrsString.charAt(i))) {
+  while (!/[A-Z]/.test((testChar = mgrsString.charAt(i)))) {
     if (i >= 2) {
       throw new Error(`MGRSPoint bad conversion from: ${mgrsString}`);
     }
@@ -42,11 +46,20 @@ function decode(mgrsString) {
   const zoneLetter = mgrsString.charAt(i++);
 
   // Should we check the zone letter here? Why not.
-  if (zoneLetter <= 'A' || zoneLetter === 'B' || zoneLetter === 'Y' || zoneLetter >= 'Z' || zoneLetter === 'I' || zoneLetter === 'O') {
-    throw new Error(`MGRSPoint zone letter ${zoneLetter} not handled: ${mgrsString}`);
+  if (
+    zoneLetter <= "A" ||
+    zoneLetter === "B" ||
+    zoneLetter === "Y" ||
+    zoneLetter >= "Z" ||
+    zoneLetter === "I" ||
+    zoneLetter === "O"
+  ) {
+    throw new Error(
+      `MGRSPoint zone letter ${zoneLetter} not handled: ${mgrsString}`
+    );
   }
 
-  hunK = mgrsString.substring(i, i += 2);
+  hunK = mgrsString.substring(i, (i += 2));
 
   const set = get100kSetForZone(zoneNumber);
 
@@ -96,4 +109,4 @@ northing meters ${mgrsString}`);
   };
 }
 
-export { decode }
+export { decode };
