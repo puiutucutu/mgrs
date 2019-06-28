@@ -22,14 +22,12 @@ function adjustNorthingForSouthernHemisphere(latitude, northing) {
  * @param {Number} longitude
  * @param {Number} latitude
  * @return {{easting: Number, zoneNumber: Number, zoneLetter: String, northing: Number}}
+ * @see https://pubs.usgs.gov/bul/1532/report.pdf Page 84
  */
 function LLtoUTM(longitude, latitude)
 {
-  const radius = 6378137.0; // ellipsis radius
-  const eccentricity = 0.00669438; // ellipsoid eccentricity
-  const eccPrimeSquared = eccentricity / (1 - eccentricity);
+  const a = 6378137.0; // ellipsis radius
   const k0 = 0.9996;
-
   const zoneNumber = determineUtmZoneNumber(longitude, latitude);
 
   const latRad = degToRad(latitude);
@@ -37,12 +35,14 @@ function LLtoUTM(longitude, latitude)
   const longOrigin = (zoneNumber - 1) * 6 - 180 + 3; // 3 puts origin in middle of zone
   const longOriginRad = degToRad(longOrigin);
 
-  const n = radius / sqrt(1 - eccentricity * sin(latRad) * sin(latRad));
-  const t = tan(latRad) * tan(latRad);
-  const c = eccPrimeSquared * cos(latRad) * cos(latRad);
-  const a = cos(latRad) * (longRad - longOriginRad);
+  const eccentricity = 0.00669438; // ellipsoid eccentricity
+  const eccPrimeSquared = eccentricity / (1 - eccentricity);
+  const N = a / sqrt(1 - eccentricity * sin(latRad) * sin(latRad));
+  const T = tan(latRad) * tan(latRad);
+  const C = eccPrimeSquared * cos(latRad) * cos(latRad);
+  const A = cos(latRad) * (longRad - longOriginRad);
 
-  const m = radius *
+  const M = a *
   (
     (
       (1) -
@@ -59,26 +59,26 @@ function LLtoUTM(longitude, latitude)
     * sin(6 * latRad)
   );
 
-  const easting = k0 * n *
+  const easting = k0 * N *
     (
-      (a + ((1 - t + c) * a * a * a) / 6) +
-      ((5 - 18 * t + t * t + 72 * c - 58 * eccPrimeSquared) * a * a * a * a * a) / 120
+      (A + ((1 - T + C) * A * A * A) / 6) +
+      ((5 - 18 * T + T * T + 72 * C - 58 * eccPrimeSquared) * A * A * A * A * A) / 120
     ) + 500000.0
   ;
 
   const northing = k0 *
   (
-    m + n * Math.tan(latRad) *
+    M + N * tan(latRad) *
     (
-      (a * a) / 2 +
-      ((5 - t + 9 * c + 4 * c * c) * a * a * a * a) / 24 +
-      ((61 - 58 * t + t * t + 600 * c - 330 * eccPrimeSquared) *
-        a *
-        a *
-        a *
-        a *
-        a *
-        a
+      (A * A) / 2 +
+      ((5 - T + 9 * C + 4 * C * C) * A * A * A * A) / 24 +
+      ((61 - 58 * T + T * T + 600 * C - 330 * eccPrimeSquared) *
+        A *
+        A *
+        A *
+        A *
+        A *
+        A
       ) / 720.0
     )
   );
