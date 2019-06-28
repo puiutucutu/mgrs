@@ -1,4 +1,5 @@
 import { LLtoUTM } from "./LLtoUTM";
+import { encode } from "./encode";
 
 /**
  * Conversion of lat/lon to MGRS.
