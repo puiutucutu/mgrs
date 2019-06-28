@@ -95,3 +95,5 @@ northing meters ${mgrsString}`);
     accuracy: accuracyBonus
   };
 }
+
+export { decode }
