@@ -7,8 +7,8 @@ import {
   SET_ORIGIN_ROW_LETTERS,
   V,
   Z
-} from './src/constants';
-import { LLtoUTM } from './src/LLtoUTM';
+} from './constants';
+import { LLtoUTM } from './LLtoUTM';
 
 /**
  * Conversion of lat/lon to MGRS.
