@@ -5,13 +5,16 @@ const { readFileSync } = require('fs');
 describe('First MGRS set', () => {
   const mgrsStr = '33UXP04';
   const point = mgrs.toPoint(mgrsStr);
+  const { x, y } = point;
+
   it('Longitude of point from MGRS correct.', () => {
-    point[0].should.be.closeTo(16.41450, 0.000001);
+    x.should.be.closeTo(16.41450, 0.000001);
   });
   it('Latitude of point from MGRS correct.', () => {
-    point[1].should.be.closeTo(48.24949, 0.000001);
+    y.should.be.closeTo(48.24949, 0.000001);
   });
   it('MGRS reference with highest accuracy correct.', () => {
+    // console.log(mgrs.forward(point))
     mgrs.forward(point).should.equal('33UXP0500444997');
   });
   it('MGRS reference with 1-digit accuracy correct.', () => {
@@ -21,26 +24,27 @@ describe('First MGRS set', () => {
 describe('Second MGRS set', () => {
   const mgrsStr = '24XWT783908'; // near UTM zone border, so there are two ways to reference this
   const point = mgrs.toPoint(mgrsStr);
+  const { x, y } = point;
   it('Longitude of point from MGRS correct.', () => {
-    point[0].should.be.closeTo(-32.66433, 0.00001);
+    x.should.be.closeTo(-32.66433, 0.00001);
   });
   it('Latitude of point from MGRS correct.', () => {
-    point[1].should.be.closeTo(83.62778, 0.00001);
+    y.should.be.closeTo(83.62778, 0.00001);
   });
   it('MGRS reference with 3-digit accuracy correct.', () => {
     mgrs.forward(point,3).should.equal('25XEN041865');
   });
   it('MGRS reference with 5-digit accuracy, northing all zeros', () => {
-    mgrs.forward([0,0],5).should.equal('31NAA6602100000');
+    mgrs.forward({x: 0, y: 0},5).should.equal('31NAA6602100000');
   });
   it('MGRS reference with 5-digit accuracy, northing one digit', () => {
-    mgrs.forward([0,0.00001],5).should.equal('31NAA6602100001');
+    mgrs.forward({x: 0, y: 0.00001},5).should.equal('31NAA6602100001');
   });
 });
 
 describe ('third mgrs set', () => {
   const mgrsStr = '11SPA7234911844';
-  const point = [-115.0820944, 36.2361322];
+  const point = { x: -115.0820944, y: 36.2361322};
   it('MGRS reference with highest accuracy correct.', () => {
     mgrs.forward(point).should.equal(mgrsStr);
   });
@@ -54,29 +58,20 @@ describe ('data validation', () => {
         false.should.be.true; // to make sure it errors
       } catch (error) {
         error.should.be.a('error');
-        error.message.should.equal('toPoint received a blank string');
+        error.message.should.equal('Argument `mgrs` cannot be a blank string');
       }
     });
     it('toPoint should return the same result whether or not spaces are included in the MGRS String', () => {
-      const [ lon1, lat1 ] = mgrs.toPoint('4QFJ 12345 67890');
-      const [ lon2, lat2]  = mgrs.toPoint('4QFJ1234567890');
-      lat1.should.equal(lat2);
-      lon1.should.equal(lon2);
+      const { x: x1, y: y1 } = mgrs.toPoint("4QFJ 12345 67890");
+      const { x: x2, y: y2 } = mgrs.toPoint("4QFJ1234567890");
+      x1.should.equal(x2);
+      y1.should.equal(y2);
     });
   });
   describe('forward function', () => {
-    it('forward throws an error when array of strings passed in', () => {
-      try {
-        mgrs.forward(['40', '40']);
-        false.should.be.true; // to make sure it errors
-      } catch (error) {
-        error.should.be.a('error');
-        error.message.should.equal('forward received an array of strings, but it only accepts an array of numbers.');
-      }
-    });
     it('forward throws an error when longitude is outside bounds', () => {
       try {
-        mgrs.forward([90, 180]);
+        mgrs.forward({x: 90, y:180});
         false.should.be.true; // to make sure it errors
       } catch (error) {
         error.should.be.a('error');
@@ -85,7 +80,7 @@ describe ('data validation', () => {
     });
     it('forward throws an error when latitude is outside bounds', () => {
       try {
-        mgrs.forward([90, 270]);
+        mgrs.forward({x: 90, y: 270});
         false.should.be.true; // to make sure it errors
       } catch (error) {
         error.should.be.a('error');
@@ -94,7 +89,7 @@ describe ('data validation', () => {
     });
     it('forward throws an error when latitude is near the north pole', () => {
       try {
-        mgrs.forward([45, 88]);
+        mgrs.forward({x:45, y:88});
         false.should.be.true; // to make sure it errors
       } catch (error) {
         error.should.be.a('error');
@@ -103,7 +98,7 @@ describe ('data validation', () => {
     });
     it('forward throws an error when latitude is near the south pole', () => {
       try {
-        mgrs.forward([45, -88]);
+        mgrs.forward({x:45, y: -88});
         false.should.be.true; // to make sure it errors
       } catch (error) {
         error.should.be.a('error');

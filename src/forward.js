@@ -12,17 +12,8 @@ import { encode } from "./encode";
  * @return {string} the MGRS  string for the given location and accuracy.
  */
 function forward(LL, accuracy = 5) {
-  if (!Array.isArray(LL)) {
-    throw new TypeError("forward did not receive an array");
-  }
+  const { x: lon, y: lat } = LL;
 
-  if (typeof LL[0] === "string" || typeof LL[1] === "string") {
-    throw new TypeError(
-      "forward received an array of strings, but it only accepts an array of numbers."
-    );
-  }
-
-  const [lon, lat] = LL;
   if (lon < -180 || lon > 180) {
     throw new TypeError(`forward received an invalid longitude of ${lon}`);
   }

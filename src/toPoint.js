@@ -13,7 +13,7 @@ const divideByTwo = divide(2);
  */
 function toPoint(mgrs) {
   if (mgrs === "") {
-    throw new TypeError("Arg `mgrs` cannot be a blank string");
+    throw new TypeError("Argument `mgrs` cannot be a blank string");
   }
 
   const { lon, lat, left, right, top, bottom } = UTMtoLL(
