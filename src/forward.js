@@ -20,11 +20,8 @@ function forward(LL, accuracy = 5) {
   if (lat < -90 || lat > 90) {
     throw new TypeError(`forward received an invalid latitude of ${lat}`);
   }
-
   if (lat < -80 || lat > 84) {
-    throw new TypeError(
-      `forward received a latitude of ${lat}, but this library does not support conversions of points in polar regions below 80°S and above 84°N`
-    );
+    throw new TypeError(`forward received a latitude of ${lat}, but this library does not support conversions of points in polar regions below 80°S and above 84°N`);
   }
 
   return encode(LLtoUTM(lon, lat), accuracy);
