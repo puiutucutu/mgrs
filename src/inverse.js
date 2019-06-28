@@ -6,8 +6,8 @@ import { decode } from "./decode";
  *
  * @param {String} mgrs
  * @return {*[]} An array with left (longitude), bottom (latitude), right
- *     (longitude) and top (latitude) values in WGS84, representing the
- *     bounding box for the provided MGRS reference.
+ * (longitude) and top (latitude) values in WGS84, representing the bounding
+ * box for the provided MGRS reference.
  */
 function inverse(mgrs) {
   const bbox = UTMtoLL(decode(mgrs.toUpperCase()));
