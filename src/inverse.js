@@ -1,19 +1,21 @@
-import { UTMtoLL } from './UTMtoLL';
+import { UTMtoLL } from "./UTMtoLL";
+import { decode } from "./decode";
 
 /**
- * Conversion of MGRS to lat/lon.
+ * Converts an MGRS string to longitude and latitude.
  *
- * @param {string} mgrs MGRS string.
- * @return {array} An array with left (longitude), bottom (latitude), right
+ * @param {String} mgrs
+ * @return {*[]} An array with left (longitude), bottom (latitude), right
  *     (longitude) and top (latitude) values in WGS84, representing the
  *     bounding box for the provided MGRS reference.
  */
 function inverse(mgrs) {
   const bbox = UTMtoLL(decode(mgrs.toUpperCase()));
-  if (bbox.lat && bbox.lon) {
-    return [bbox.lon, bbox.lat, bbox.lon, bbox.lat];
-  }
-  return [bbox.left, bbox.bottom, bbox.right, bbox.top];
+
+  return bbox.lat && bbox.lon
+    ? [bbox.lon, bbox.lat, bbox.lon, bbox.lat]
+    : [bbox.left, bbox.bottom, bbox.right, bbox.top]
+  ;
 }
 
-export { inverse }
+export { inverse };
