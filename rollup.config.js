@@ -1,9 +1,9 @@
 export default {
-	input: 'mgrs.js',
+  input: "src/index.js",
   output: {
-    exports: 'named',
-    file: 'dist/mgrs.js',
-    format: 'umd',
-    name: 'mgrs'
+    exports: "named",
+    file: "dist/mgrs.js",
+    format: "umd",
+    name: "mgrs"
   }
 };
