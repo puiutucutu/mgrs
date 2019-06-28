@@ -16,37 +16,37 @@ function LLtoUTM(longitude, latitude)
 {
   const radius = 6378137.0; // ellipsis radius
   const eccentricity = 0.00669438; // ellipsoid eccentricity
+  const eccPrimeSquared = eccentricity / (1 - eccentricity);
   const k0 = 0.9996;
-  const latRad = degToRad(latitude);
-  const longRad = degToRad(longitude);
+
   const zoneNumber = determineUtmZoneNumber(longitude, latitude);
 
+  const latRad = degToRad(latitude);
+  const longRad = degToRad(longitude);
   const longOrigin = (zoneNumber - 1) * 6 - 180 + 3; // 3 puts origin in middle of zone
   const longOriginRad = degToRad(longOrigin);
-
-  const eccPrimeSquared = eccentricity / (1 - eccentricity);
 
   const n = radius / sqrt(1 - eccentricity * sin(latRad) * sin(latRad));
   const t = tan(latRad) * tan(latRad);
   const c = eccPrimeSquared * cos(latRad) * cos(latRad);
   const a = cos(latRad) * (longRad - longOriginRad);
 
-  const m =
-    radius *
-    ((1 -
-      eccentricity / 4 -
-      (3 * eccentricity * eccentricity) / 64 -
-      (5 * eccentricity * eccentricity * eccentricity) / 256) *
-      latRad -
-      ((3 * eccentricity) / 8 +
-        (3 * eccentricity * eccentricity) / 32 +
-        (45 * eccentricity * eccentricity * eccentricity) / 1024) *
-        Math.sin(2 * latRad) +
-      ((15 * eccentricity * eccentricity) / 256 +
-        (45 * eccentricity * eccentricity * eccentricity) / 1024) *
-        Math.sin(4 * latRad) -
-      ((35 * eccentricity * eccentricity * eccentricity) / 3072) *
-        Math.sin(6 * latRad));
+  const m = radius *
+  (
+      (
+        (1) -
+        (eccentricity / 4) -
+        ((3 * eccentricity * eccentricity) / 64) -
+        ((5 * eccentricity * eccentricity * eccentricity) / 256)
+      )
+      * latRad
+      - ((3 * eccentricity) / 8 + (3 * eccentricity * eccentricity) / 32 + (45 * eccentricity * eccentricity * eccentricity) / 1024)
+      * sin(2 * latRad)
+      + ((15 * eccentricity * eccentricity) / 256 + (45 * eccentricity * eccentricity * eccentricity) / 1024)
+      * sin(4 * latRad)
+      - ((35 * eccentricity * eccentricity * eccentricity) / 3072)
+      * sin(6 * latRad)
+  );
 
   const easting = k0 * n *
     (
