@@ -8,6 +8,17 @@ const cos = x => Math.cos(x);
 const tan = x => Math.tan(x);
 
 /**
+ * Apply a 10,000,000 meter offset for southern hemisphere.
+ *
+ * @param {Number} latitude
+ * @param {Number} northing
+ * @return {Number}
+ */
+function adjustNorthingForSouthernHemisphere(latitude, northing) {
+  return latitude < 0 ? northing + 10000000.0 : northing;
+}
+
+/**
  * @param {Number} longitude
  * @param {Number} latitude
  * @return {{easting: Number, zoneNumber: Number, zoneLetter: String, northing: Number}}
@@ -72,13 +83,8 @@ function LLtoUTM(longitude, latitude)
     )
   );
 
-  const northingAdjustedForSouthernHemisphere = latitude < 0 // 10000000 meter offset for southern hemisphere
-    ? northing + 10000000.0
-    : northing
-  ;
-
   return {
-    northing: Math.trunc(northingAdjustedForSouthernHemisphere),
+    northing: Math.trunc(adjustNorthingForSouthernHemisphere(northing)),
     easting: Math.trunc(easting),
     zoneLetter: getLetterDesignator(latitude),
     zoneNumber
