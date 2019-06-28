@@ -1,38 +1,15 @@
-/**
- * UTM zones are grouped, and assigned to one of a group of 6
- * sets.
- *
- * {int} @private
- */
-const NUM_100K_SETS = 6;
-
-/**
- * The column letters (for easting) of the lower left value, per
- * set.
- *
- * {string} @private
- */
-const SET_ORIGIN_COLUMN_LETTERS = 'AJSAJS';
-
-/**
- * The row letters (for northing) of the lower left value, per
- * set.
- *
- * {string} @private
- */
-const SET_ORIGIN_ROW_LETTERS = 'AFAFAF';
-
-const A = 65; // A
-const I = 73; // I
-const O = 79; // O
-const V = 86; // V
-const Z = 90; // Z
-export default {
-  forward,
-  inverse,
-  toPoint
-};
-
+import {
+  NUM_100K_SETS,
+  SET_ORIGIN_COLUMN_LETTERS,
+  SET_ORIGIN_ROW_LETTERS,
+  A,
+  I,
+  O,
+  V,
+  Z
+} from './src/constants';
+import { degToRad } from './src/degToRad';
+import { radToDeg } from './src/radToDeg';
 
 /**
  * Conversion of lat/lon to MGRS.
@@ -94,28 +71,6 @@ export function toPoint(mgrs) {
     return [bbox.lon, bbox.lat];
   }
   return [(bbox.left + bbox.right) / 2, (bbox.top + bbox.bottom) / 2];
-}
-
-/**
- * Conversion from degrees to radians.
- *
- * @private
- * @param {number} deg the angle in degrees.
- * @return {number} the angle in radians.
- */
-function degToRad(deg) {
-  return (deg * (Math.PI / 180.0));
-}
-
-/**
- * Conversion from radians to degrees.
- *
- * @private
- * @param {number} rad the angle in radians.
- * @return {number} the angle in degrees.
- */
-function radToDeg(rad) {
-  return (180.0 * (rad / Math.PI));
 }
 
 /**
@@ -686,3 +641,9 @@ function getMinNorthing(zoneLetter) {
   }
 
 }
+
+export default {
+  forward,
+  inverse,
+  toPoint
+};
