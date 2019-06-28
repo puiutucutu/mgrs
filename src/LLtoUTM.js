@@ -14,8 +14,7 @@ const tan = x => Math.tan(x);
  * @param {Number} longitude
  * @param {Number} latitude
  * @param {Number} accuracy
- * @return {{easting: number, zoneNumber: number, zoneLetter: char, northing:
- *   number}}
+ * @return {{easting: Number, zoneNumber: Number, zoneLetter: String, northing: Number}}
  */
 function LLtoUTM(longitude, latitude, accuracy = 5) {
   const radius = 6378137.0; // ellipsis radius
