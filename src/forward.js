@@ -10,9 +10,7 @@ import { encode } from "./encode";
  *      100 m, 2 for 1000 m or 1 for 10000 m). Optional, default is 5.
  * @return {string} the MGRS string for the given location and accuracy.
  */
-function forward(ll, accuracy) {
-  accuracy = accuracy || 5; // default accuracy 1m
-
+function forward(ll, accuracy = 5) {
   if (!Array.isArray(ll)) {
     throw new TypeError("forward did not receive an array");
   }
@@ -37,7 +35,7 @@ function forward(ll, accuracy) {
     );
   }
 
-  return encode(LLtoUTM({ lat, lon }), accuracy);
+  return encode(LLtoUTM(lon, lat), accuracy);
 }
 
 export { forward };
