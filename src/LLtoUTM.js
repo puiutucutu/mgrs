@@ -33,19 +33,19 @@ function LLtoUTM(longitude, latitude)
 
   const m = radius *
   (
-      (
-        (1) -
-        (eccentricity / 4) -
-        ((3 * eccentricity * eccentricity) / 64) -
-        ((5 * eccentricity * eccentricity * eccentricity) / 256)
-      )
-      * latRad
-      - ((3 * eccentricity) / 8 + (3 * eccentricity * eccentricity) / 32 + (45 * eccentricity * eccentricity * eccentricity) / 1024)
-      * sin(2 * latRad)
-      + ((15 * eccentricity * eccentricity) / 256 + (45 * eccentricity * eccentricity * eccentricity) / 1024)
-      * sin(4 * latRad)
-      - ((35 * eccentricity * eccentricity * eccentricity) / 3072)
-      * sin(6 * latRad)
+    (
+      (1) -
+      (eccentricity / 4) -
+      ((3 * eccentricity * eccentricity) / 64) -
+      ((5 * eccentricity * eccentricity * eccentricity) / 256)
+    )
+    * latRad
+    - ((3 * eccentricity) / 8 + (3 * eccentricity * eccentricity) / 32 + (45 * eccentricity * eccentricity * eccentricity) / 1024)
+    * sin(2 * latRad)
+    + ((15 * eccentricity * eccentricity) / 256 + (45 * eccentricity * eccentricity * eccentricity) / 1024)
+    * sin(4 * latRad)
+    - ((35 * eccentricity * eccentricity * eccentricity) / 3072)
+    * sin(6 * latRad)
   );
 
   const easting = k0 * n *
