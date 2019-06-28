@@ -1,7 +1,10 @@
 import {
-  A, I, O,
+  A,
+  I,
+  O,
   SET_ORIGIN_COLUMN_LETTERS,
-  SET_ORIGIN_ROW_LETTERS, V,
+  SET_ORIGIN_ROW_LETTERS,
+  V,
   Z
 } from './constants';
 
@@ -37,11 +40,19 @@ function getLetter100kID(column, row, parm) {
     rollover = true;
   }
 
-  if (colInt === I || (colOrigin < I && colInt > I) || ((colInt > I || colOrigin < I) && rollover)) {
+  if (
+    colInt === I ||
+    (colOrigin < I && colInt > I) ||
+    ((colInt > I || colOrigin < I) && rollover)
+  ) {
     colInt++;
   }
 
-  if (colInt === O || (colOrigin < O && colInt > O) || ((colInt > O || colOrigin < O) && rollover)) {
+  if (
+    colInt === O ||
+    (colOrigin < O && colInt > O) ||
+    ((colInt > O || colOrigin < O) && rollover)
+  ) {
     colInt++;
 
     if (colInt === I) {
@@ -56,16 +67,23 @@ function getLetter100kID(column, row, parm) {
   if (rowInt > V) {
     rowInt = rowInt - V + A - 1;
     rollover = true;
-  }
-  else {
+  } else {
     rollover = false;
   }
 
-  if (((rowInt === I) || ((rowOrigin < I) && (rowInt > I))) || (((rowInt > I) || (rowOrigin < I)) && rollover)) {
+  if (
+    rowInt === I ||
+    (rowOrigin < I && rowInt > I) ||
+    ((rowInt > I || rowOrigin < I) && rollover)
+  ) {
     rowInt++;
   }
 
-  if (((rowInt === O) || ((rowOrigin < O) && (rowInt > O))) || (((rowInt > O) || (rowOrigin < O)) && rollover)) {
+  if (
+    rowInt === O ||
+    (rowOrigin < O && rowInt > O) ||
+    ((rowInt > O || rowOrigin < O) && rollover)
+  ) {
     rowInt++;
 
     if (rowInt === I) {
@@ -77,8 +95,7 @@ function getLetter100kID(column, row, parm) {
     rowInt = rowInt - V + A - 1;
   }
 
-  const twoLetter = String.fromCharCode(colInt) + String.fromCharCode(rowInt);
-  return twoLetter;
+  return String.fromCharCode(colInt) + String.fromCharCode(rowInt);
 }
 
-export { getLetter100kID }
+export { getLetter100kID };
