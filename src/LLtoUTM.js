@@ -1,11 +1,6 @@
 import { getLetterDesignator } from "./getLetterDesignator";
 import { determineUtmZoneNumber } from "./determineUtmZoneNumber";
-
-const degToRad = degrees => (degrees * Math.PI) / 180;
-const sqrt = x => Math.sqrt(x);
-const sin = x => Math.sin(x);
-const cos = x => Math.cos(x);
-const tan = x => Math.tan(x);
+import { degToRad, sqrt, sin, cos, tan } from "./math";
 
 /**
  * Apply a 10,000,000 meter offset for southern hemisphere.
