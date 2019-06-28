@@ -2,7 +2,7 @@ import { LLtoUTM } from "./LLtoUTM";
 import { encode } from "./encode";
 
 /**
- * Conversion of longitude and latitude to MGRS.
+ * Converts longitude and latitude pair to a MGRS string.
  *
  * @param {Object} LL Object literal with lat and lon properties on a WGS84
  * ellipsoid.
