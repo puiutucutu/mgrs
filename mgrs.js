@@ -8,9 +8,9 @@ import {
   V,
   Z
 } from './src/constants';
-import { degToRad } from './src/degToRad';
-import { radToDeg } from './src/radToDeg';
 import { LLtoUTM } from './src/LLtoUTM';
+
+import { degToRad, radToDeg } from './src/math';
 
 /**
  * Conversion of lat/lon to MGRS.
