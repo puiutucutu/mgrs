@@ -561,9 +561,3 @@ function getMinNorthing(zoneLetter) {
   }
 
 }
-
-export default {
-  forward,
-  inverse,
-  toPoint
-};
