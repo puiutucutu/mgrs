@@ -19,6 +19,8 @@ function adjustNorthingForSouthernHemisphere(latitude, northing) {
 }
 
 /**
+ * Converts a set of Longitude and Latitude co-ordinates to UTM using the WGS84 ellipsoid.
+ *
  * @param {Number} longitude
  * @param {Number} latitude
  * @return {{easting: Number, zoneNumber: Number, zoneLetter: String, northing: Number}}
