@@ -13,6 +13,8 @@
  *     for the bounding box calculated according to the provided accuracy.
  *     Returns null if the conversion failed.
  */
+import { radToDeg } from './math';
+
 function UTMtoLL(utm) {
 
   const UTMNorthing = utm.northing;
