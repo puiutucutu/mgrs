@@ -81,7 +81,7 @@ function LLtoUTM(longitude, latitude)
   );
 
   return {
-    northing: Math.trunc(adjustNorthingForSouthernHemisphere(northing)),
+    northing: Math.trunc(adjustNorthingForSouthernHemisphere(latitude, northing)),
     easting: Math.trunc(easting),
     zoneLetter: getLetterDesignator(latitude),
     zoneNumber
