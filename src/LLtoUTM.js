@@ -1,10 +1,7 @@
 import { getLetterDesignator } from "./getLetterDesignator";
 import { determineUtmZoneNumber } from "./determineUtmZoneNumber";
 
-function degToRad(degrees) {
-  return (degrees * Math.PI) / 180;
-}
-
+const degToRad = degrees => (degrees * Math.PI) / 180;
 const sqrt = x => Math.sqrt(x);
 const sin = x => Math.sin(x);
 const cos = x => Math.cos(x);
