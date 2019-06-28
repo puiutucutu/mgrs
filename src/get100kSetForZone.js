@@ -15,3 +15,5 @@ function get100kSetForZone(i) {
 
   return setParm;
 }
+
+export { get100kSetForZone}

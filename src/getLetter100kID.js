@@ -80,3 +80,5 @@ function getLetter100kID(column, row, parm) {
   const twoLetter = String.fromCharCode(colInt) + String.fromCharCode(rowInt);
   return twoLetter;
 }
+
+export { getLetter100kID }

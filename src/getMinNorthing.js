@@ -82,3 +82,5 @@ function getMinNorthing(zoneLetter) {
   }
 
 }
+
+export { getMinNorthing }

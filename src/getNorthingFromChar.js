@@ -50,3 +50,5 @@ function getNorthingFromChar(n, set) {
 
   return northingValue;
 }
+
+export { getNorthingFromChar }

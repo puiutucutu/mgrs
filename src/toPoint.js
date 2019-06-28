@@ -1,6 +1,6 @@
 import { UTMtoLL } from './UTMtoLL';
 
-export function toPoint(mgrs) {
+function toPoint(mgrs) {
   if (mgrs === '') {
     throw new TypeError('toPoint received a blank string');
   }
@@ -10,3 +10,6 @@ export function toPoint(mgrs) {
   }
   return [(bbox.left + bbox.right) / 2, (bbox.top + bbox.bottom) / 2];
 }
+
+
+export { toPoint}

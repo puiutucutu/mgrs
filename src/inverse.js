@@ -8,10 +8,12 @@ import { UTMtoLL } from './UTMtoLL';
  *     (longitude) and top (latitude) values in WGS84, representing the
  *     bounding box for the provided MGRS reference.
  */
-export function inverse(mgrs) {
+function inverse(mgrs) {
   const bbox = UTMtoLL(decode(mgrs.toUpperCase()));
   if (bbox.lat && bbox.lon) {
     return [bbox.lon, bbox.lat, bbox.lon, bbox.lat];
   }
   return [bbox.left, bbox.bottom, bbox.right, bbox.top];
 }
+
+export { inverse }

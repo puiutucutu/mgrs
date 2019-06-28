@@ -1,4 +1,4 @@
-import { LLtoUTM } from './LLtoUTM';
+import { LLtoUTM } from "./LLtoUTM";
 
 /**
  * Conversion of lat/lon to MGRS.
@@ -9,18 +9,20 @@ import { LLtoUTM } from './LLtoUTM';
  *      100 m, 2 for 1000 m or 1 for 10000 m). Optional, default is 5.
  * @return {string} the MGRS string for the given location and accuracy.
  */
-export function forward(ll, accuracy) {
+function forward(ll, accuracy) {
   accuracy = accuracy || 5; // default accuracy 1m
 
   if (!Array.isArray(ll)) {
-    throw new TypeError('forward did not receive an array');
+    throw new TypeError("forward did not receive an array");
   }
 
-  if (typeof ll[0] === 'string' || typeof ll[1] === 'string') {
-    throw new TypeError('forward received an array of strings, but it only accepts an array of numbers.');
+  if (typeof ll[0] === "string" || typeof ll[1] === "string") {
+    throw new TypeError(
+      "forward received an array of strings, but it only accepts an array of numbers."
+    );
   }
 
-  const [ lon, lat ] = ll;
+  const [lon, lat] = ll;
   if (lon < -180 || lon > 180) {
     throw new TypeError(`forward received an invalid longitude of ${lon}`);
   }
@@ -29,8 +31,12 @@ export function forward(ll, accuracy) {
   }
 
   if (lat < -80 || lat > 84) {
-    throw new TypeError(`forward received a latitude of ${lat}, but this library does not support conversions of points in polar regions below 80°S and above 84°N`);
+    throw new TypeError(
+      `forward received a latitude of ${lat}, but this library does not support conversions of points in polar regions below 80°S and above 84°N`
+    );
   }
 
   return encode(LLtoUTM({ lat, lon }), accuracy);
 }
+
+export { forward };

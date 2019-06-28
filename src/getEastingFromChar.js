@@ -37,3 +37,5 @@ function getEastingFromChar(e, set) {
 
   return eastingValue;
 }
+
+export { getEastingFromChar}
