@@ -1,16 +1,14 @@
 import {
-  NUM_100K_SETS,
-  SET_ORIGIN_COLUMN_LETTERS,
-  SET_ORIGIN_ROW_LETTERS,
   A,
   I,
+  NUM_100K_SETS,
   O,
+  SET_ORIGIN_COLUMN_LETTERS,
+  SET_ORIGIN_ROW_LETTERS,
   V,
   Z
 } from './src/constants';
 import { LLtoUTM } from './src/LLtoUTM';
-
-import { degToRad, radToDeg } from './src/math';
 
 /**
  * Conversion of lat/lon to MGRS.
