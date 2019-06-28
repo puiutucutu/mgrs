@@ -1,6 +1,10 @@
 import { UTMtoLL } from "./UTMtoLL";
 import { decode } from "./decode";
 
+/**
+ * @param {String} mgrs
+ * @return {*}
+ */
 function toPoint(mgrs) {
   if (mgrs === "") {
     throw new TypeError("toPoint received a blank string");
