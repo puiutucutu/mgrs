@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint mgrs.js && eslint test",
     "test": "npm run build && nyc mocha test/test.js",
-    "build": "mkdir -p dist && rollup -c"
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
